@@ -35,3 +35,24 @@ if(blue_whale > 35) {
 } else if (blue_whale < 20) {
   print("SMALL")}
 ```
+
+## Switch statement 
+
+```{r}
+#This is one option to writing better if else statements, create a new value 
+housing_type <- "single"
+
+switch(housing_type, 
+       "single" = print("400"),
+       "double" = print("750"),
+       "whole" = print("1100"))
+
+if(housing_type == "whole") {
+  print("1100")
+} else if (housing_type == "double") {
+  print("750")
+} else if (housing_type == "single") {
+  print ("400")
+}
+       
+```
