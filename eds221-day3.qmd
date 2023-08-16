@@ -2,7 +2,14 @@
 title: "eds221-day3"
 format: html
 editor: visual
+execute: 
+  warning: TRUE
 ---
+
+```{r}
+library(palmerpenguins)
+library(tidyverse)
+```
 
 ## Conditional Statement
 
@@ -82,5 +89,71 @@ for (i in seq_along(height)) {
 for (i in seq_along(height)) {
  mean = height[i] / mean(height)
  print(mean)
+}
+```
+
+## For loop w conditional statement 
+
+```{r}
+#Write a for loop with a conditional if statement that returns the means of all numeric variables w/in the penguins datatset
+
+#is.numeric (asks is the thing numeric)
+#[[]] asks for the specific data in said col
+
+#mean(vec, na.rm = TRUE)
+
+peng <- vector(mode = "numeric", length = ncol(penguins))
+
+for(i in seq_along(penguins)) {
+  if(is.numeric(penguins[[i]])) {
+    penguin_mean <- mean(penguins[[i]], na.rm = TRUE)
+    peng[i] <- penguin_mean
+    print(peng[i])
+  }
+}
+
+```
+
+## Functional programming for easier iteration 
+
+Use apply() to iterate over rows or columms, margin = 1 is rows, and margin = 2 represents columns
+
+```{r}
+#Find the median of each of the cols 
+apply(X = mtcars, MARGIN = 2, FUN = median)
+#This is the same exact thing of above
+apply(mtcars, 2, median)
+```
+
+Use dplyr::across()
+
+Starter: find the mean flipper length of penguins by species
+
+```{r}
+penguins |> 
+  group_by(species) |>
+  summarize(mean_flipper = mean(flipper_length_mm, na.rm = TRUE),
+            sd_flipper = sd(flipper_length_mm, na.rm = TRUE),
+            max_body_mass = max(body_mass_g, na.rm = TRUE))
+```
+
+```{r}
+#group_by only knows to grab whatever is next in expression
+penguins |>
+  group_by(species, island) |>
+  summarize(across(.cols = where(is.numeric),
+                          mean, 
+                          na.rm = TRUE))
+```
+
+## Detecting a string pattern
+
+```{r}
+food <- "I love enchiladas"
+
+if (str_detect(food, "burritos")) {
+  print("yay burritos") 
+} else {
+  print("what about burritos")
 }
 ```
