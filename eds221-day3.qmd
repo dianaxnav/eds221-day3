@@ -155,3 +155,5 @@ if (str_detect(food, "burritos")) {
   print("what about burritos")
 }
 ```
+
+ok now it will work
