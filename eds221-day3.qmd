@@ -87,12 +87,12 @@ for (i in seq_along(height)) {
 ##Write a for loop that calculates the value of height for each element divided by the mean of the entire height vector 
 
 for (i in seq_along(height)) {
- mean = height[i] / mean(height)
+ yut = height[i] / mean(height)
  print(mean)
 }
 ```
 
-## For loop w conditional statement 
+## For loop w conditional statement
 
 ```{r}
 #Write a for loop with a conditional if statement that returns the means of all numeric variables w/in the penguins datatset
@@ -114,7 +114,7 @@ for(i in seq_along(penguins)) {
 
 ```
 
-## Functional programming for easier iteration 
+## Functional programming for easier iteration
 
 Use apply() to iterate over rows or columms, margin = 1 is rows, and margin = 2 represents columns
 
@@ -139,11 +139,9 @@ penguins |>
 
 ```{r}
 #group_by only knows to grab whatever is next in expression
-penguins |>
-  group_by(species, island) |>
-  summarize(across(.cols = where(is.numeric),
-                          mean, 
-                          na.rm = TRUE))
+penguins %>% 
+  group_by(species, island) %>% 
+  summarize(across(.cols = where(is.numeric), mean, na.rm = TRUE))
 ```
 
 ## Detecting a string pattern
